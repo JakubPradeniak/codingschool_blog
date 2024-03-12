@@ -1,1 +1,1 @@
-# codingschool_blog
+# Jednoduchý blog napsaný v PHP
