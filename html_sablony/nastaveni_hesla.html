@@ -17,6 +17,12 @@
     <main>
         <h1>Nastavení hesla</h1>
 
+        <!-- 
+        ukázka zpráv serveru pro úspěch/chybu při zpracování požadavku
+        klasická zpráva - vzhled se nastaví pomocí CSS
+        -->
+        <p>Heslo bylo změněno!</p>
+
         <form action="nastaveni_hesla.html" method="post">
             <label for="heslo">Heslo</label>
             <input type="password" name="heslo" id="heslo">
@@ -38,5 +44,15 @@
         <hr>
         <p>2024 &copy; domena.cz</p>
     </footer>
+
+    <!-- 
+    ukázka zpráv serveru pro úspěch/chybu při zpracování požadavku
+    flash zpráva - vzhled se nastaví pomocí CSS, sama zmizí - nastaví se pomocí JS
+    -->
+    <div>
+        <!-- tento div slouží jako barevný indikátor úspěchu požadavku -->
+        <div></div>
+        <p>Heslo bylo změněno!</p>
+    </div>
 </body>
 </html>
