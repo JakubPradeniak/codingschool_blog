@@ -1,0 +1,78 @@
+h1 {
+    font-size: 2.5rem;
+}
+
+article {
+    font-size: 1.2rem;
+
+    &:hover {
+        background-color: lightgray;
+    }
+}
+
+/*
+article:hover {
+    background-color: lightgray;
+}
+*/
+
+h2 {
+    font-size: 1.5em;
+}
+
+#nadpis {
+    color: cadetblue;
+}
+
+.odstavec {
+    font-size: 1rem;
+}
+
+article > a {
+    font-size: 1.5rem;
+}
+
+#nadpis + p {
+    color: brown;
+}
+
+h1, h2 {
+    color: darkblue;
+}
+
+p.velky {
+    font-size: 1.5rem;
+}
+
+a:visited {
+    color: black;
+}
+
+p::first-line {
+    font-size: 1.5rem;
+}
+
+artice {    
+    &::before {
+        content: "před";
+        color: red;
+    }
+
+    &::after {
+        content: "za";
+        color: red;
+    }
+}
+
+a:only-child {
+    color: crimson;
+}
+
+p:nth-of-type(3) {
+    color: red;
+}
+
+p:not(.odstavec) {
+    font-size: 1.5rem;
+    color: darkorange;
+}
