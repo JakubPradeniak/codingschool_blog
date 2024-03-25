@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+:root {
+    --zakladni-velikost-pisma: 16px;
+    --druh-pisma: 'Inter', sans-serif;
+}
+
 html {
-    font-size: 16px;
+    font-size: var(--zakladni-velikost-pisma);
 }
 
 *, *::before, *::after {
@@ -9,6 +16,8 @@ html {
 body {
     margin: 0;
     padding: 0;
+
+    font-family: var(--druh-pisma);
 }
 
 img {
