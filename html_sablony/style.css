@@ -1,8 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 :root {
-    --zakladni-velikost-pisma: 16px;
+    --zakladni-velikost-pisma: 18px;
     --druh-pisma: 'Inter', sans-serif;
+
+    --pozadi-aplikace: #F4F4F4;
+    --pozadi-navigace: rgba(0, 0, 0, 0.9);
+    --pozadi-zapati: #212121;
+    --pozadi-elementu: #FFFFFF;
+    --pozadi-tlacitek: #000000;
+    --pozadi-zprava-uspech: #337D19;
+    --pozadi-zprava-chyba: #8A1C1C;
+
+    --barva-pisma-primarni: #000000;
+    --barva-pisma-sekundarni: #FFFFFF;
+    --barva-pisma-seda: #6F6F6F;
+
+    --vrzeny-stin: rgba(0, 0, 0, 0.25);
 }
 
 html {
