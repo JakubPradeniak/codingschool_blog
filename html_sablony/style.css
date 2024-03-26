@@ -17,6 +17,7 @@
     --barva-pisma-seda: #6F6F6F;
 
     --vrzeny-stin: rgba(0, 0, 0, 0.25);
+    --ramecek-inputy: #343434;
 }
 
 html {
@@ -31,14 +32,48 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: var(--druh-pisma);
     background-color: var(--pozadi-aplikace);
+
+    height: 2500px;
+}
+
+body, input, button {
+    font-family: var(--druh-pisma);
+    font-size: 1.125rem;
 }
 
 img {
     max-width: 100%;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        margin-top: 1.875rem;
+        margin-bottom: 1rem;
+
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+
+    input {
+        width: 29.75rem;
+        padding: 0.875rem;
+        border: 1px solid var(--ramecek-inputy);
+    }
+
+    input[type="submit"] {
+        border: none;
+        background-color: var(--pozadi-tlacitek);
+        color: var(--barva-pisma-sekundarni);
+        font-weight: 600;
+
+        margin-top: 1.875rem;
+    }
+}
 
 .karta-clanku {
     background-color: var(--pozadi-elementu);
@@ -51,5 +86,10 @@ img {
 
     > img {
         width: 38%;
+    }
+
+    .karta-textace {
+        padding: 1.875rem;
+        padding-left: 0;
     }
 }
