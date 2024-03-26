@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 :root {
-    --zakladni-velikost-pisma: 18px;
+    --zakladni-velikost-pisma: 16px;
     --druh-pisma: 'Inter', sans-serif;
 
     --pozadi-aplikace: #F4F4F4;
@@ -32,8 +32,24 @@ body {
     padding: 0;
 
     font-family: var(--druh-pisma);
+    background-color: var(--pozadi-aplikace);
 }
 
 img {
     max-width: 100%;
+}
+
+
+.karta-clanku {
+    background-color: var(--pozadi-elementu);
+
+    width: 37.5rem;
+    max-width: 100%;
+
+    display: flex;
+    gap: 1.25rem;
+
+    > img {
+        width: 38%;
+    }
 }
