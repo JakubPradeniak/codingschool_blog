@@ -18,13 +18,25 @@
 
     --vrzeny-stin: rgba(0, 0, 0, 0.25);
     --ramecek-inputy: #343434;
+
+    --sirka-obsahu: 76.25rem;
+
+    --mezera-xs: 0.875rem;
+    --mezera-s: 1rem;
+    --mezera-m: 1.25rem;
+    --mezera-l: 1.875rem;
+
+    --pismo-l: 2rem;
+    --pismo-xl: 2.25rem;
 }
 
 html {
     font-size: var(--zakladni-velikost-pisma);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -33,11 +45,11 @@ body {
     padding: 0;
 
     background-color: var(--pozadi-aplikace);
-
-    height: 2500px;
 }
 
-body, input, button {
+body,
+input,
+button {
     font-family: var(--druh-pisma);
     font-size: 1.125rem;
 }
@@ -46,13 +58,54 @@ img {
     max-width: 100%;
 }
 
+nav {
+    width: 100%;
+    height: 6.25rem;
+    background-color: var(--pozadi-navigace);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    div {
+        width: var(--sirka-obsahu);
+        max-width: 100%;
+        height: 100%;
+        margin: 0 auto;
+
+        display: flex;
+        gap: 3.75rem;
+        align-items: center;
+    }
+
+    a {
+        font-size: var(--pismo-l);
+        font-weight: 300;
+        text-decoration: none;
+        color: var(--barva-pisma-sekundarni);
+
+        &:first-child {
+            font-size: var(--pismo-xl);
+            font-weight: 700;
+        }
+
+        &:nth-child(2) {
+            margin-left: auto;
+        }
+
+        &:not(:first-child):hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 form {
     display: flex;
     flex-direction: column;
 
     label {
-        margin-top: 1.875rem;
-        margin-bottom: 1rem;
+        margin-top: var(--mezera-l);
+        margin-bottom: var(--mezera-s);
 
         &:first-of-type {
             margin-top: 0;
@@ -61,7 +114,7 @@ form {
 
     input {
         width: 29.75rem;
-        padding: 0.875rem;
+        padding: var(--mezera-xs);
         border: 1px solid var(--ramecek-inputy);
     }
 
@@ -71,7 +124,7 @@ form {
         color: var(--barva-pisma-sekundarni);
         font-weight: 600;
 
-        margin-top: 1.875rem;
+        margin-top: var(--mezera-l);
     }
 }
 
@@ -82,14 +135,46 @@ form {
     max-width: 100%;
 
     display: flex;
-    gap: 1.25rem;
+    gap: var(--mezera-m);
 
-    > img {
-        width: 38%;
+    >img {
+        width: 14.25rem;
+        height: 12.75rem;
+        object-fit: cover;
     }
 
     .karta-textace {
-        padding: 1.875rem;
+        padding: var(--mezera-l);
         padding-left: 0;
+
+        flex-basis: 100%;
+
+        h2 {
+            margin: 0;
+            font-weight: 700;
+            font-size: var(--pismo-l);
+        }
+
+        a {
+            font-weight: 700;
+            font-style: italic;
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: var(--barva-pisma-primarni);
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        p {
+            margin-top: 1.375rem;
+            margin-bottom: 0;
+
+            &:last-child {
+                margin-top: 2.25rem;
+                text-align: right;
+            }
+        }
     }
 }
