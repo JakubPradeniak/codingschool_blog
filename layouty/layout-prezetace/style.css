@@ -1,0 +1,58 @@
+:root {
+    --content-width: 60rem;
+    --box-shadow: rgba(113, 115, 121, 0.35);
+    --background-content: #c3d9ef;
+    --background-aside: #dddec5;
+    --background-footer: #363636;
+    --color-footer: #ffffff;
+}
+
+body {
+    margin: 0;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    padding: 1.5rem;
+    box-shadow: 0 1px 1px var(--box-shadow), 0 2px 2px var(--box-shadow), 0 4px 4px var(--box-shadow);
+
+    .nav-content {
+        width: var(--content-width);
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+
+        .links {
+            display: flex;
+            gap: 1rem;
+        }
+    }
+}
+
+.content {
+    width: var(--content-width);
+    max-width: 100%;
+    margin: 1.5rem auto 0 auto;
+    display: flex;
+    gap: 2rem;
+
+    main {
+        background: var(--background-content);
+        flex: 2;
+    }
+
+    aside {
+        background: var(--background-aside);
+        flex: 1;
+    }
+}
+
+footer {
+    margin-top: 2rem;
+    color: var(--color-footer);
+    background: var(--background-footer);
+    padding: 4rem;
+    text-align: center;
+}
