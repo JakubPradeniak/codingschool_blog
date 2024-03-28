@@ -25,8 +25,12 @@ nav {
         justify-content: space-between;
 
         .links {
-            display: flex;
-            gap: 1rem;
+
+            /*display: flex;
+            gap: 1rem;*/
+            a {
+                margin-left: 1rem;
+            }
         }
     }
 }
