@@ -25,9 +25,10 @@
     --mezera-s: 1rem;
     --mezera-m: 1.25rem;
     --mezera-l: 1.875rem;
-
+    --mezera-xl: 2.5rem;
     --mezera-xxl: 3.75rem;
 
+    --pismo-m: 1.25rem;
     --pismo-l: 2rem;
     --pismo-xl: 2.25rem;
 }
@@ -101,9 +102,16 @@ nav {
     }
 }
 
+main {
+    width: var(--sirka-obsahu);
+    max-width: 100%;
+    margin: 5.625rem auto 0;
+}
+
 footer {
     background-color: var(--pozadi-zapati);
     color: var(--barva-pisma-sekundarni);
+    margin-top: 7.5rem;
     padding-top: 5.75rem;
     padding-bottom: 6.75rem;
     font-size: 1.5rem;
@@ -172,6 +180,38 @@ form {
     }
 }
 
+.hlavni-strana {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--mezera-m);
+    row-gap: var(--mezera-xl);
+
+    >div:last-child {
+        flex-basis: 100%;
+        text-align: center;
+
+        a {
+            display: inline-block;
+            font-size: var(--pismo-m);
+            font-style: italic;
+            color: var(--barva-pisma-primarni);
+            background-color: var(--pozadi-elementu);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.375rem 2.25rem;
+
+            &:first-child {
+                margin-right: var(--mezera-m);
+            }
+
+            &.vypnuto {
+                pointer-events: none;                
+                color: var(--barva-pisma-seda);
+            }
+        }
+    }
+}
+
 .karta-clanku {
     background-color: var(--pozadi-elementu);
 
@@ -202,7 +242,7 @@ form {
         a {
             font-weight: 700;
             font-style: italic;
-            font-size: 1.25rem;
+            font-size: var(--pismo-m);
             text-decoration: none;
             color: var(--barva-pisma-primarni);
 
