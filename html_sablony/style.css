@@ -26,6 +26,8 @@
     --mezera-m: 1.25rem;
     --mezera-l: 1.875rem;
 
+    --mezera-xxl: 3.75rem;
+
     --pismo-l: 2rem;
     --pismo-xl: 2.25rem;
 }
@@ -74,7 +76,7 @@ nav {
         margin: 0 auto;
 
         display: flex;
-        gap: 3.75rem;
+        gap: var(--mezera-xxl);
         align-items: center;
     }
 
@@ -95,6 +97,48 @@ nav {
 
         &:not(:first-child):hover {
             text-decoration: underline;
+        }
+    }
+}
+
+footer {
+    background-color: var(--pozadi-zapati);
+    color: var(--barva-pisma-sekundarni);
+    padding-top: 5.75rem;
+    padding-bottom: 6.75rem;
+    font-size: 1.5rem;
+
+    b {
+        font-size: var(--pismo-xl);
+    }
+
+    a {
+        color: var(--barva-pisma-sekundarni);
+        text-decoration: none;
+    }
+
+    hr {
+        margin: 1.5rem 0;
+    }
+
+    p {
+        text-align: right;
+        font-style: italic;
+    }
+
+    >div {
+        width: var(--sirka-obsahu);
+        max-width: 100%;
+        margin: 0 auto;
+
+        >div {
+            display: flex;
+            gap: var(--mezera-xxl);
+            align-items: flex-end;
+
+            a:first-of-type {
+                margin-left: auto;
+            }
         }
     }
 }
