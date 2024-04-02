@@ -20,6 +20,7 @@
     --ramecek-inputy: #343434;
 
     --sirka-obsahu: 76.25rem;
+    --vyska-navigace: 6.25rem;
 
     --mezera-xs: 0.875rem;
     --mezera-s: 1rem;
@@ -63,7 +64,7 @@ img {
 
 nav {
     width: 100%;
-    height: 6.25rem;
+    height: var(--vyska-navigace);
     background-color: var(--pozadi-navigace);
 
     position: fixed;
@@ -71,10 +72,21 @@ nav {
     left: 0;
 
     div {
-        width: var(--sirka-obsahu);
-        max-width: 100%;
-        height: 100%;
-        margin: 0 auto;
+        &:only-child {
+            width: var(--sirka-obsahu);
+            max-width: 100%;
+            height: 100%;
+            margin: 0 auto;
+
+            >a {
+                font-size: var(--pismo-xl);
+                font-weight: 700;
+            }
+        }
+
+        >div {
+            margin-left: auto;
+        }
 
         display: flex;
         gap: var(--mezera-xxl);
@@ -87,19 +99,22 @@ nav {
         text-decoration: none;
         color: var(--barva-pisma-sekundarni);
 
-        &:first-child {
-            font-size: var(--pismo-xl);
-            font-weight: 700;
-        }
-
-        &:nth-child(2) {
-            margin-left: auto;
-        }
-
-        &:not(:first-child):hover {
+        &:not(:only-of-type):hover {
             text-decoration: underline;
         }
     }
+
+    svg {
+        cursor: pointer;
+        display: none;
+        margin-left: auto;
+    }
+}
+
+body>img {
+    width: 100%;
+    height: 21.875rem;
+    object-fit: cover;
 }
 
 main {
@@ -180,6 +195,10 @@ form {
     }
 }
 
+.obrazek-zahlavi-hlevni-strana {
+    height: 32.5rem;
+}
+
 .hlavni-strana {
     display: flex;
     flex-wrap: wrap;
@@ -205,7 +224,7 @@ form {
             }
 
             &.vypnuto {
-                pointer-events: none;                
+                pointer-events: none;
                 color: var(--barva-pisma-seda);
             }
         }
@@ -258,6 +277,60 @@ form {
             &:last-child {
                 margin-top: 2.25rem;
                 text-align: right;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1241px) {
+
+    nav>div,
+    footer>div,
+    main {
+        padding: 0 var(--mezera-l);
+    }
+
+    .hlavni-strana>div:not(:last-child) {
+        flex-basis: calc(50% - var(--mezera-m) / 2);
+    }
+}
+
+@media screen and (max-width: 1081px) {
+    .hlavni-strana>div:not(:last-child) {
+        flex-basis: 100%;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    nav {
+        .otevrit {
+            display: block;
+
+            &.otevreno {
+                display: none;
+            }
+        }
+
+        .zavrit.otevreno {
+            display: block;
+        }
+
+        div:not(:only-child) {
+            position: fixed;
+            top: var(--vyska-navigace);
+            bottom: 0;
+            right: -100%;
+            width: 65%;
+
+            flex-direction: column;
+            align-items: flex-end;
+            padding: var(--mezera-m) var(--mezera-xxl);
+            background-color: var(--pozadi-navigace);
+
+            transition: right .3s ease-in-out;
+
+            &.otevreno {
+                right: 0;
             }
         }
     }
