@@ -334,4 +334,42 @@ form {
             }
         }
     }
+
+    footer {
+        div:not(:only-child) {
+            flex-wrap: wrap;
+            gap: var(--mezera-l);
+
+            b {
+                flex-basis: 100%;
+            }
+
+            a:first-of-type {
+                margin: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 641px) {
+    .karta-clanku {
+        flex-wrap: wrap;
+        gap: 0;
+
+        .karta-textace {
+            padding: var(--mezera-l);
+        }
+
+        img {
+            width: 100%;
+            height: 8rem;
+        }
+    }
+}
+
+@media screen and (max-width: 361px) {
+    .hlavni-strana>div:last-child a:first-child {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
 }
