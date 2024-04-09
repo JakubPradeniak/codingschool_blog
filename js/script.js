@@ -6,7 +6,7 @@ function spojDvaRetezce(retezec_1, retezec_2) {
     } else {
         return retezec_1 + " " + retezec_2;
     }
-    
+
     return "";
 }
 
@@ -31,3 +31,50 @@ zprava = spojDvaRetezce("Test", "spojení");
 console.log(spojeneRetezce);
 console.log(zprava);
 console.log(spojDvaRetezce("test", ""));
+
+function provedPetkratFor() {
+    let pocetIteraci;
+    for (let i = 0; i < 5; i++) {
+        console.log(`Iterace číslo ${i}!`);
+        console.log("Iterace číslo " + i + "!")
+        pocetIteraci = i + 1;
+    }
+    console.log(`Cyklus byl ukončen po ${pocetIteraci} iteracích.`)
+}
+
+provedPetkratFor();
+
+const pismena = ['a', 'b', 'c', 'd'];
+
+console.log(pismena[3]);
+
+let spojPismena = "";
+for (let i = 0; i < pismena.length; i++) {
+    if (pismena[i] === 'c') {
+        break;
+    }
+    
+    console.log(pismena[i]);
+    // konkatenace - způsob 1
+    // spojPismena = spojPismena + pismena[i];
+    // konkatenace - zkrácený zápis
+    spojPismena += pismena[i];
+}
+
+console.log(spojPismena)
+
+let spojPismena2 = "";
+
+function spojovaniPismen(pismeno) {
+    console.log(pismeno);
+    spojPismena2 += pismeno;
+}
+
+pismena.forEach(spojovaniPismen);
+
+pismena.forEach((pismeno, index) => {
+    console.log(pismeno, index);
+    spojPismena2 += pismeno;
+});
+
+console.log(spojPismena2)
