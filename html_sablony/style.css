@@ -22,6 +22,7 @@
     --sirka-obsahu: 76.25rem;
     --vyska-navigace: 6.25rem;
 
+    --mezera-xxs: 0.675rem;
     --mezera-xs: 0.875rem;
     --mezera-s: 1rem;
     --mezera-m: 1.25rem;
@@ -78,7 +79,7 @@ nav {
             height: 100%;
             margin: 0 auto;
 
-            >a {
+            .logo {
                 font-size: var(--pismo-xl);
                 font-weight: 700;
             }
@@ -99,7 +100,7 @@ nav {
         text-decoration: none;
         color: var(--barva-pisma-sekundarni);
 
-        &:not(:only-of-type):hover {
+        &:not(.logo):hover {
             text-decoration: underline;
         }
     }
@@ -108,6 +109,31 @@ nav {
         cursor: pointer;
         display: none;
         margin-left: auto;
+    }
+
+    .odkaz-s-podnavigaci {
+        position: relative;
+
+        .podnavigace {
+            display: none;
+            position: absolute;
+            top: var(--pismo-l);
+            padding-top: var(--mezera-xl);
+        }
+
+        .podnavigace-odkazy {
+            background-color: var(--pozadi-navigace);
+            padding: var(--mezera-m);
+            flex-direction: column;
+            display: flex;
+            gap: var(--mezera-xs);
+            align-items: flex-start;
+            max-width: max-content;
+        }
+
+        &:hover .podnavigace {
+            display: block;
+        }
     }
 }
 
@@ -315,7 +341,7 @@ form {
             display: block;
         }
 
-        div:not(:only-child) {
+        #odkazy {
             position: fixed;
             top: var(--vyska-navigace);
             bottom: 0;
@@ -324,6 +350,7 @@ form {
 
             flex-direction: column;
             align-items: flex-end;
+            gap: var(--mezera-m);
             padding: var(--mezera-m) var(--mezera-xxl);
             background-color: var(--pozadi-navigace);
 
@@ -331,6 +358,23 @@ form {
 
             &.otevreno {
                 right: 0;
+            }
+        }
+
+        .odkaz-s-podnavigaci {
+            display: block;
+            text-align: right;
+
+            .podnavigace {
+                display: block;
+                position: static;
+                padding: 0;
+
+                .podnavigace-odkazy {
+                    background-color: transparent;
+                    align-items: flex-end;
+                    padding-bottom: 0;
+                }
             }
         }
     }
