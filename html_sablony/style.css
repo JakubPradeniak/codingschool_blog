@@ -221,6 +221,20 @@ form {
     }
 }
 
+dialog {
+    border: none;
+    /* 
+    chceme padding úplně vypnout, aby vnitřní
+    element překryl celý dialog - kvůli funkcionalitě
+    zavření při kliknutí do backdropu
+    */
+    padding: 0;
+
+    .obsah-dialogu {
+        padding: var(--mezera-m);
+    }
+}
+
 .obrazek-zahlavi-hlevni-strana {
     height: 32.5rem;
 }
