@@ -322,6 +322,35 @@ dialog {
     }
 }
 
+
+#zprava {
+    position: fixed;
+    bottom: var(--mezera-l);
+    right: var(--mezera-l);
+    box-shadow: 0 0 1rem var(--vrzeny-stin);
+    background-color: var(--pozadi-elementu);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+
+    .typ-zpravy {
+        width: 0.75rem;
+    }
+
+    .uspech {
+        background-color: var(--pozadi-zprava-uspech);
+    }
+
+    .chyba {
+        background-color: var(--pozadi-zprava-chyba);
+    }
+
+    p {
+        margin: 0.75rem 0;
+        font-style: italic;
+    }
+}
+
 @media screen and (max-width: 1241px) {
 
     nav>div,

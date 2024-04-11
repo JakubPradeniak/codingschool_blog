@@ -25,6 +25,8 @@ Zobrazit dialogové okno:
 - dialog indentifikujeme pomocí ID atributu
 - element, který bude otevírat/zavírat dialog bude uloženo ID dialogu v data atributu
 
+
+HTML:
 <button data-otevri-dialog="info">Otevři dialog</button>
 
 <dialog id="info">
@@ -39,8 +41,6 @@ Zobrazit dialogové okno:
 const otevriDialog = document.querySelectorAll("[data-otevri-dialog]");
 const zavriDialog = document.querySelectorAll("[data-zavri-dialog]");
 const dialogy = document.getElementsByTagName('dialog');
-
-console.log(otevriDialog, zavriDialog, dialogy);
 
 /* vytvoření posluchačů událostí pro otevření - libovolný počet */
 for (let i = 0; i < otevriDialog.length; i++) {
@@ -67,3 +67,26 @@ for (let i = 0; i < dialogy.length; i++) {
     });
 }
 
+
+/*
+Informační zpráva - například (ne)úspěšné odeslání formuláře apod.
+
+- zobrazí se fixně v pravém spodní rohu (CSS) - zprávu budeme přidávat přes BE
+- po nějaké době (5s) sama zmizí (JS)
+
+- identifikace zprávy podle ID atributu
+
+HTML:
+<div id="zprava">
+    <div class="typ-zpravy uspech"></div>
+    <p>Text zprávy.</p>
+</div>
+*/
+
+const zprava = document.getElementById('zprava');
+
+if (zprava) {
+    setTimeout(() => {
+        zprava.remove();
+    }, 5000);
+}
