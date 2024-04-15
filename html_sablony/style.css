@@ -69,6 +69,12 @@ img {
     max-width: 100%;
 }
 
+h1,
+h2,
+p {
+    margin: 0;
+}
+
 nav {
     width: 100%;
     height: var(--vyska-navigace);
@@ -308,7 +314,6 @@ dialog {
         flex-basis: 100%;
 
         h2 {
-            margin: 0;
             font-weight: 700;
             font-size: var(--pismo-l);
         }
@@ -345,7 +350,6 @@ dialog {
             font-size: var(--pismo-xxl);
             text-align: center;
             font-weight: 600;
-            margin: 0;
         }
 
         p {
@@ -384,7 +388,6 @@ dialog {
     margin-top: 5rem;
 
     h2 {
-        margin: 0;
         font-size: var(--pismo-xl);
         font-weight: 600;
         font-style: italic;
@@ -405,7 +408,6 @@ dialog {
         font-style: italic;
 
         &:first-child {
-            margin: 0;
             display: flex;
             justify-content: space-between;
 
@@ -418,6 +420,20 @@ dialog {
             margin-top: var(--mezera-l);
             margin-bottom: 0;
         }
+    }
+}
+
+.jednoduchy-formular {
+    width: 29.75rem;
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    form {
+        margin-top: 3.125rem;
     }
 }
 
