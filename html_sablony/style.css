@@ -26,13 +26,18 @@
     --mezera-xs: 0.875rem;
     --mezera-s: 1rem;
     --mezera-m: 1.25rem;
-    --mezera-l: 1.875rem;
-    --mezera-xl: 2.5rem;
-    --mezera-xxl: 3.75rem;
+    --mezera-l: 1.5rem;
+    --mezera-xl: 1.875rem;
+    --mezera-xxl: 2.5rem;
+    --mezera-xxxl: 3.75rem;
+    --mezera-xxxxl: 5.625rem;
 
     --pismo-m: 1.25rem;
     --pismo-l: 2rem;
     --pismo-xl: 2.25rem;
+    --pismo-xxl: 3rem;
+
+    --okraj-hlavni-obsah: 7.75rem;
 }
 
 html {
@@ -54,7 +59,8 @@ body {
 
 body,
 input,
-button {
+button,
+textarea {
     font-family: var(--druh-pisma);
     font-size: 1.125rem;
 }
@@ -90,7 +96,7 @@ nav {
         }
 
         display: flex;
-        gap: var(--mezera-xxl);
+        gap: var(--mezera-xxxl);
         align-items: center;
     }
 
@@ -118,7 +124,7 @@ nav {
             display: none;
             position: absolute;
             top: var(--pismo-l);
-            padding-top: var(--mezera-xl);
+            padding-top: var(--mezera-xxl);
         }
 
         .podnavigace-odkazy {
@@ -182,7 +188,7 @@ footer {
 
         >div {
             display: flex;
-            gap: var(--mezera-xxl);
+            gap: var(--mezera-xxxl);
             align-items: flex-end;
 
             a:first-of-type {
@@ -197,7 +203,7 @@ form {
     flex-direction: column;
 
     label {
-        margin-top: var(--mezera-l);
+        margin-top: var(--mezera-xl);
         margin-bottom: var(--mezera-s);
 
         &:first-of-type {
@@ -205,10 +211,16 @@ form {
         }
     }
 
-    input {
+    input,
+    textarea {
         width: 29.75rem;
+        max-width: 100%;
         padding: var(--mezera-xs);
         border: 1px solid var(--ramecek-inputy);
+    }
+
+    textarea {
+        width: 100%;
     }
 
     input[type="submit"] {
@@ -217,7 +229,10 @@ form {
         color: var(--barva-pisma-sekundarni);
         font-weight: 600;
 
-        margin-top: var(--mezera-l);
+        margin-top: var(--mezera-xl);
+        margin-left: auto;
+        width: 14.25rem;
+        cursor: pointer;
     }
 }
 
@@ -243,7 +258,7 @@ dialog {
     display: flex;
     flex-wrap: wrap;
     column-gap: var(--mezera-m);
-    row-gap: var(--mezera-xl);
+    row-gap: var(--mezera-xxl);
 
     >div:last-child {
         flex-basis: 100%;
@@ -287,7 +302,7 @@ dialog {
     }
 
     .karta-textace {
-        padding: var(--mezera-l);
+        padding: var(--mezera-xl);
         padding-left: 0;
 
         flex-basis: 100%;
@@ -322,11 +337,94 @@ dialog {
     }
 }
 
+.clanek {
+    header {
+        padding: 0 var(--okraj-hlavni-obsah) var(--mezera-xl);
+
+        h1 {
+            font-size: var(--pismo-xxl);
+            text-align: center;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        p {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5rem;
+            margin-top: 4.375rem;
+            margin-bottom: 0;
+
+            i:last-child {
+                font-weight: 600;
+            }
+        }
+    }
+
+    article {
+        padding: 5rem var(--okraj-hlavni-obsah);
+        background-color: var(--pozadi-elementu);
+
+        p {
+            margin-top: var(--mezera-l);
+            margin-bottom: 0;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        img {
+            margin-top: 3.125rem;
+        }
+    }
+}
+
+.komentare {
+    margin-top: 5rem;
+
+    h2 {
+        margin: 0;
+        font-size: var(--pismo-xl);
+        font-weight: 600;
+        font-style: italic;
+        text-align: center;
+    }
+
+    form {
+        padding: 5rem var(--okraj-hlavni-obsah) 0;
+    }
+}
+
+.komentar {
+    padding: var(--mezera-xl) var(--okraj-hlavni-obsah);
+    margin-top: var(--mezera-xxl);
+    background-color: var(--pozadi-elementu);
+
+    p {
+        font-style: italic;
+
+        &:first-child {
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+
+            b {
+                font-size: 1.5rem;
+            }
+        }
+
+        &:last-child {
+            margin-top: var(--mezera-l);
+            margin-bottom: 0;
+        }
+    }
+}
 
 #zprava {
     position: fixed;
-    bottom: var(--mezera-l);
-    right: var(--mezera-l);
+    bottom: var(--mezera-xl);
+    right: var(--mezera-xl);
     box-shadow: 0 0 1rem var(--vrzeny-stin);
     background-color: var(--pozadi-elementu);
     padding: 1.25rem 1.5rem;
@@ -356,7 +454,7 @@ dialog {
     nav>div,
     footer>div,
     main {
-        padding: 0 var(--mezera-l);
+        padding: 0 var(--mezera-xl);
     }
 
     .hlavni-strana>div:not(:last-child) {
@@ -365,12 +463,20 @@ dialog {
 }
 
 @media screen and (max-width: 1081px) {
+    :root {
+        --okraj-hlavni-obsah: 4rem;
+    }
+
     .hlavni-strana>div:not(:last-child) {
         flex-basis: 100%;
     }
 }
 
 @media screen and (max-width: 769px) {
+    :root {
+        --okraj-hlavni-obsah: 1rem;
+    }
+
     nav {
         .otevrit {
             display: block;
@@ -394,7 +500,7 @@ dialog {
             flex-direction: column;
             align-items: flex-end;
             gap: var(--mezera-m);
-            padding: var(--mezera-m) var(--mezera-xxl);
+            padding: var(--mezera-m) var(--mezera-xxxl);
             background-color: var(--pozadi-navigace);
 
             transition: right .3s ease-in-out;
@@ -425,7 +531,7 @@ dialog {
     footer {
         div:not(:only-child) {
             flex-wrap: wrap;
-            gap: var(--mezera-l);
+            gap: var(--mezera-xl);
 
             b {
                 flex-basis: 100%;
@@ -436,6 +542,10 @@ dialog {
             }
         }
     }
+
+    .clanek article {
+        padding: 1rem var(--okraj-hlavni-obsah);
+    }
 }
 
 @media screen and (max-width: 641px) {
@@ -444,13 +554,21 @@ dialog {
         gap: 0;
 
         .karta-textace {
-            padding: var(--mezera-l);
+            padding: var(--mezera-xl);
         }
 
         img {
             width: 100%;
             height: 8rem;
         }
+    }
+}
+
+@media screen and (max-width: 521px) {
+    .clanek header p {
+        flex-wrap: wrap;
+        gap: var(--mezera-xxs);
+        margin-top: var(--mezera-xl);
     }
 }
 
