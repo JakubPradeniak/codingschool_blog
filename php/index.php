@@ -7,7 +7,7 @@ const PRACOVNI_POZICE = "programátor";
 
 $jmeno = "Jakub Pradeniak";
 
-echo $jmeno . " - " . PRACOVNI_POZICE;
+//echo $jmeno . " - " . PRACOVNI_POZICE;
 
 function umocni(int $cislo, int $mocnina) : int {
     if ($mocnina === 0) {
@@ -28,5 +28,15 @@ function umocni(int $cislo, int $mocnina) : int {
     return $vysledek;
 }
 
-echo "<br>";
-echo umocni(5, 3);
+//echo "<br>";
+//echo umocni(5, 3);
+
+$array = [];
+
+var_dump(count($array) === 0);
+
+$prispevek = ['name' => 'Název'];
+
+if (!$prispevek) {
+    echo 'Nic nebylo nalezeno.';
+}

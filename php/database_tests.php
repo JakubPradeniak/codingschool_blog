@@ -66,13 +66,40 @@ function updateCategory(string $name, string $slug, int $id): void {
     ]);
 }
 
-function getUser(int $id): object {
+function getUser(int $id): object|false {
     global $connection;
 
-    $statement = $connection->prepare('SELECT name, email, role FROM users WHERE id=:id');
-    $statement->execute(['id' => $id]);
-    return $statement->fetch(PDO::FETCH_OBJ);
+    try {
+        $statement = $connection->prepare('SELECT name, email, role FROM users WHERE id>=:id ORDER BY name ASC, id DESC LIMIT 15');
+        $statement->execute(['id' => $id]);
+        return $statement->fetch(PDO::FETCH_OBJ);
+    } catch(PDOException $e) {
+        //echo 'Něco se pokazilo.';
+        echo '<pre>';
+        var_dump($e);
+        echo '</pre>';
+        return false;
+    }
 }
 
+function getPost(int $id): object|false {
+    global $connection;
+
+    try {
+        $statement = $connection->preprare(
+            'SELECT posts.*, users.name AS author_name, categories.name AS category_name FROM posts JOIN users ON posts.author=users.id JOIN categories ON posts.category=categories.id WHERE posts.id=:id'
+        );
+        $statement->execute(['id' => $id]);
+        return $statement->fetch(PDO::FETCH_OBJ);
+    } catch(PDOException $e) {
+        echo 'Něco se pokazilo.';
+        return false;
+    }
+}
+
+
 $user = getUser(1);
-echo  json_encode($user);
+
+if ($user) {
+    echo json_encode($user);
+}
