@@ -6,8 +6,10 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_SLUG', field: ['slug'])]
 class Category
 {
     #[ORM\Id]
@@ -30,6 +32,11 @@ class Category
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+    }
+
+    public function createSlug(SluggerInterface $slugger): void
+    {
+        $this->slug = $slugger->slug($this->name);
     }
 
     public function getId(): ?int

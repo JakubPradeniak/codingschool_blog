@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_SLUG', field: ['slug'])]
 class Post
 {
     #[ORM\Id]
@@ -23,7 +27,7 @@ class Post
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column]
+    #[ORM\Column(tpye: Types::DATETIME_IMMUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $date_created = null;
 
     #[ORM\Column(length: 255)]
@@ -35,6 +39,28 @@ class Post
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     private ?Category $category = null;
+
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'post', orphanRemoval: true)]
+    private Collection $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+
+    #[ORM\PrePersist]
+    public function setDateCreatedValue(): void 
+    {
+        $this->date_created = new \DateTimeImmutable();
+    }
+
+    public function createSlug(SluggerInterface $slugger): void
+    {
+        $this->slug = $slugger->slug($this->name);
+    }
 
     public function getId(): ?int
     {
@@ -121,6 +147,36 @@ class Post
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getPost() === $this) {
+                $comment->setPost(null);
+            }
+        }
 
         return $this;
     }
