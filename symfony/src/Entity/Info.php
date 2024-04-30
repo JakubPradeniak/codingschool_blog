@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: InfoRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_SLUG', field: ['slug'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_SLUG', fields: ['slug'])]
 class Info
 {
     #[ORM\Id]
