@@ -52,7 +52,7 @@ class Post
     }
 
     #[ORM\PrePersist]
-    public function setDateCreatedValue(): void 
+    public function setDateCreatedValue(): void
     {
         $this->date_created = new \DateTimeImmutable();
     }

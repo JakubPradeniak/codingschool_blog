@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\EntityListener;
 
 use App\Entity\Category;
-use Doctrine\Persisntence\Event\LifecycleEventArgs;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 
