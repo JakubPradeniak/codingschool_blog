@@ -48,11 +48,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->posts = new ArrayCollection();
     }
 
-    /*#[ORM\PrePersist]
+    #[ORM\PrePersist]
     public function setRolesValue(): void
     {
-        $this->roles[] = UserRoles.User;
-    }*/
+        $this->roles[] = UserRoles::User;
+    }
 
     public function getId(): ?int
     {
