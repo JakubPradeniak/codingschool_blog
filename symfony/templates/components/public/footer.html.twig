@@ -3,9 +3,9 @@
         <!-- div bude sloužit k rozdělení na dva sloupce -->
         <div>
             <b>Logo</b>
-            <a href="">GDPR</a>
-            <a href="">Cookies</a>
-            <a href="">Podmínky</a>
+            {% for info in info_pages %}
+                <a href="">{{ info.name }}</a>
+            {% endfor %}
             <a href="">Kontakt</a>
         </div>
         <hr>

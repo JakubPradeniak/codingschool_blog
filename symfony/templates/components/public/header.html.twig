@@ -7,9 +7,9 @@
                 <a href="">Články</a>
                 <div class="podnavigace">
                     <div class="podnavigace-odkazy">
-                        <a href="">Tech</a>
-                        <a href="">Programování</a>
-                        <a href="">Ostatní</a>
+                        {% for category in categories %}
+                            <a href="">{{ category.name }}</a>
+                        {% endfor %}
                     </div>                        
                 </div>                    
             </div>
