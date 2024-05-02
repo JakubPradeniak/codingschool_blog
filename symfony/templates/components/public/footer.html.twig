@@ -4,7 +4,7 @@
         <div>
             <b>Logo</b>
             {% for info in info_pages %}
-                <a href="">{{ info.name }}</a>
+                <a href="{{ path('app_info', {slug: info.slug}) }}">{{ info.name }}</a>
             {% endfor %}
             <a href="">Kontakt</a>
         </div>
