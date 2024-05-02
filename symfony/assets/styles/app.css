@@ -303,11 +303,13 @@ dialog {
 
     >img {
         width: 14.25rem;
-        height: 12.75rem;
+        height: 100%;
         object-fit: cover;
     }
 
     .karta-textace {
+        display: flex;
+        flex-direction: column;
         padding: var(--mezera-xl);
         padding-left: 0;
 
@@ -335,7 +337,7 @@ dialog {
             margin-bottom: 0;
 
             &:last-child {
-                margin-top: 2.25rem;
+                margin-top: auto;
                 text-align: right;
             }
         }

@@ -1,8 +1,8 @@
 <div class="karta-clanku">
-    <img src="nahled.png" alt="Název článku">
+    <img src="{{ asset('images/' ~ post.image) }}" alt="{{ post.name }}">
     <div class="karta-textace">
-        <h2>Název článku</h2>
-        <p>Krátký výtah z článku...</p>
+        <h2>{{ post.name }}</h2>
+        <p>{{ post.content|striptags|u.truncate(80, '...') }}</p>
         <p>
             <a href="">Přečíst</a>
         </p>
