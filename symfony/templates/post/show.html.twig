@@ -28,13 +28,7 @@
                 {% include 'components/public/comment.html.twig' %}
             {% endfor %}
 
-            <form action="clanek.html" method="post">
-                <label for="jmeno">Jméno</label>
-                <input type="text" name="jmeno" id="jmeno" required>
-                <label for="text">Text</label>
-                <textarea name="text" id="text" rows="6" required></textarea>
-                <input type="submit" value="Přidat komentář">
-            </form>
+            {{ form(comment_form) }}
         </section>
     </main>
 

@@ -205,20 +205,23 @@ footer {
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+    div {
+        display: flex;
+        flex-direction: column;
 
-    label {
-        margin-top: var(--mezera-xl);
-        margin-bottom: var(--mezera-s);
-
-        &:first-of-type {
+        &:first-child>label {
             margin-top: 0;
         }
     }
 
+    label {
+        margin-top: var(--mezera-xl);
+        margin-bottom: var(--mezera-s);
+    }
+
     input,
-    textarea {
+    textarea,
+    button {
         width: 29.75rem;
         max-width: 100%;
         padding: var(--mezera-xs);
@@ -229,7 +232,8 @@ form {
         width: 100%;
     }
 
-    input[type="submit"] {
+    input[type="submit"],
+    button[type="submit"] {
         border: none;
         background-color: var(--pozadi-tlacitek);
         color: var(--barva-pisma-sekundarni);
@@ -239,6 +243,16 @@ form {
         margin-left: auto;
         width: 14.25rem;
         cursor: pointer;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: var(--mezera-xxs);
+        font-size: var(--pismo-s);
+        color: var(--pozadi-zprava-chyba);
+        text-align: right;
     }
 }
 
