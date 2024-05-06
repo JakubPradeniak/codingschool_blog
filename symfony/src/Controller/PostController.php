@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use App\Utils\PaginationData;
+use App\Utils\ReadingTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +34,17 @@ class PostController extends AbstractController
             'category' => $category ?? null,
             'posts' => $paginator,
             'pagination_data' => $paginationData,
+        ]);
+    }
+
+    #[Route('/prispevek/{slug}', name: 'app_post')]
+    public function show(Post $post): Response
+    {
+
+        $redingTime = ReadingTime::calculate($post->getContent());
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+            'reading_time' => $redingTime,
         ]);
     }
 }
