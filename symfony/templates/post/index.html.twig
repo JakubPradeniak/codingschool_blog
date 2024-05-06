@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% include 'components/public/header.html.twig' %}
+    
+    <main class="vypis-clanku">
+        <h1>{{ category ? category.name : 'Všechny příspěvky' }}</h1>
+        
+        {% for post in posts %}
+            {% include 'components/public/post_card.html.twig' %}
+        {% endfor %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <div class="strankovani">
+            <a href="{{ path('app_posts', {slug: category ? category.slug : null, page: pagination_data.previousPage}) }}" 
+            {% if not pagination_data.hasPreviousPage %}
+                class="vypnuto" aria-disabled="true"
+            {% endif %}
+            >Předchozí</a>
+            <a href="{{ path('app_posts', {slug: category ? category.slug : null, page: pagination_data.nextPage}) }}"
+            {% if not pagination_data.hasNextPage %}
+                class="vypnuto" aria-disabled="true"
+            {% endif %}
+            >Další</a>
+        </div>
+    </main>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>G:/bluenet/github/codingschool_blog/symfony/src/Controller/PostController.php</code></li>
-        <li>Your template at <code>G:/bluenet/github/codingschool_blog/symfony/templates/post/index.html.twig</code></li>
-    </ul>
-</div>
+    {% include 'components/public/footer.html.twig' %}
 {% endblock %}

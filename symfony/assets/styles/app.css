@@ -265,6 +265,10 @@ dialog {
     flex-wrap: wrap;
     column-gap: var(--mezera-m);
     row-gap: var(--mezera-xxl);
+
+    h1 {
+        flex-basis: 100%;
+    }
 }
 
 .strankovani {
