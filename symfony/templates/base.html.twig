@@ -11,6 +11,15 @@
     <body>
         {% block body %}{% endblock %}
 
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div id="zprava">
+                    <div class="typ-zpravy {{ label is same as('success') ? 'uspech' : 'chyba' }}"></div>
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
