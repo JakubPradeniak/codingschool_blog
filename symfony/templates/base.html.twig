@@ -15,7 +15,9 @@
             {% for message in messages %}
                 <div id="zprava">
                     <div class="typ-zpravy {{ label is same as('success') ? 'uspech' : 'chyba' }}"></div>
-                    <p>{{ message }}</p>
+                    <p>
+                        {{ message }}
+                    </p>
                 </div>
             {% endfor %}
         {% endfor %}
