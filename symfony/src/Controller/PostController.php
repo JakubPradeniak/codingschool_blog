@@ -57,7 +57,13 @@ class PostController extends AbstractController
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
 
+            $this->addFlash('success', 'Komentář byl úspěšně vytvořen.');
+
             return $this->redirectToRoute('app_post', ['slug' => $post->getSlug()]);
+        }
+
+        if ($commentForm->isSubmitted() && !$commentForm->isValid()) {
+            $this->addFlash('error', 'Komentář se nepodařilo vytvořit. Zkontrojte správnost vyplnených informací.');
         }
 
         return $this->render('post/show.html.twig', [
