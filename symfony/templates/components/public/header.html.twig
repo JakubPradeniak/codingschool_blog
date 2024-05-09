@@ -13,7 +13,11 @@
                     </div>                        
                 </div>                    
             </div>
-            <a href="{{ path('app_login') }}">Přihlásit se</a>
+            {% if app.user %}
+                <a href="{{ path('app_user_account') }}">Můj účet</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Přihlásit se</a>
+            {% endif %}
         </div>
         <svg class="otevrit" width="51" height="51" viewBox="0 0 51 51" fill="none"
             xmlns="http://www.w3.org/2000/svg">
