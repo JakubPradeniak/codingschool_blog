@@ -6,3 +6,4 @@
  */
 import './styles/app.css';
 import './script/script.js';
+import './script/post-loader.js';

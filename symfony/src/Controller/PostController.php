@@ -13,7 +13,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\UnicodeString;
 
 class PostController extends AbstractController
 {
@@ -33,7 +35,7 @@ class PostController extends AbstractController
         $page = max(1, $request->query->getInt('page', 1));
         $offset = ($page - 1) * PostRepository::POSTS_PER_PAGE;
         $paginator = $this->postRepository->getPaginatior($category ?? null, $offset);
-        $paginationData = new PaginationData(PostRepository::POSTS_PER_PAGE, count($paginator), $page);
+        $paginationData = new PaginationData(PostRepository::POSTS_PER_PAGE, $paginator->count(), $page);
 
         return $this->render('post/index.html.twig', [
             'category' => $category ?? null,
@@ -57,13 +59,51 @@ class PostController extends AbstractController
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
 
+            $this->addFlash('success', 'Komentář byl úspěšně vytvořen.');
+
             return $this->redirectToRoute('app_post', ['slug' => $post->getSlug()]);
+        }
+
+        if ($commentForm->isSubmitted() && !$commentForm->isValid()) {
+            $this->addFlash('error', 'Komentář se nepodařilo vytvořit. Zkontrojte správnost vyplnených informací.');
         }
 
         return $this->render('post/show.html.twig', [
             'post' => $post,
             'reading_time' => $redingTime,
             'comment_form' => $commentForm,
+        ]);
+    }
+
+    #[Route('/api/prispevky/{slug}', name: 'api_posts')]
+    public function apiIndex(Request $request, CategoryRepository $categoryRepository, string $slug = ''): Response
+    {
+        if ($slug) {
+            $category = $categoryRepository->findOneBy(['slug' => $slug]);
+        }
+
+        $page = max(1, $request->query->getInt('page', 1));
+        $offset = ($page - 1) * PostRepository::POSTS_PER_PAGE;
+        $paginator = $this->postRepository->getPaginatior($category ?? null, $offset);
+        $paginationData = new PaginationData(PostRepository::POSTS_PER_PAGE, $paginator->count(), $page);
+
+        $processedPosts = array_map(
+            function ($post) {
+                $content = (new UnicodeString(strip_tags($post->getContent())))->truncate(80, '...');
+                $url = $this->generateUrl('app_post', ['slug' => $post->getSlug()]);
+                return [
+                    'name' => $post->getName(),
+                    'image' => '/images/' . $post->getImage(),
+                    'content' => $content,
+                    'url' => $url
+                ];
+            },
+            $paginator->getQuery()->getResult()
+        );
+
+        return $this->json([
+            'posts' => $processedPosts,
+            'pagination' => $paginationData
         ]);
     }
 }
