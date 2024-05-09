@@ -4,9 +4,11 @@
     {% include 'components/public/header.html.twig' %}
     
     <main class="vypis-clanku">
-        {% for post in posts %}
-            {% include 'components/public/post_card.html.twig' %}
-        {% endfor %}
+        <div id="clanky">
+            {% for post in posts %}
+                {% include 'components/public/post_card.html.twig' %}
+            {% endfor %}
+        </div>
     </main>
 
     {% include 'components/public/footer.html.twig' %}
