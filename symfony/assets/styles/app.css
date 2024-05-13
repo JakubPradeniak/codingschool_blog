@@ -6,6 +6,7 @@
 
     --pozadi-aplikace: #F4F4F4;
     --pozadi-navigace: rgba(0, 0, 0, 0.9);
+    --pozadi-navigace-admin: #343434;
     --pozadi-zapati: #212121;
     --pozadi-elementu: #FFFFFF;
     --pozadi-tlacitek: #000000;
@@ -241,19 +242,6 @@ form {
         width: 100%;
     }
 
-    input[type="submit"],
-    button {
-        border: none;
-        background-color: var(--pozadi-tlacitek);
-        color: var(--barva-pisma-sekundarni);
-        font-weight: 600;
-
-        margin-top: var(--mezera-xl);
-        margin-left: auto;
-        width: 14.25rem;
-        cursor: pointer;
-    }
-
     ul {
         list-style: none;
         padding: 0;
@@ -263,6 +251,23 @@ form {
         color: var(--pozadi-zprava-chyba);
         text-align: right;
     }
+}
+
+input[type="submit"],
+button,
+.tlacitko {
+    border: none;
+    background-color: var(--pozadi-tlacitek);
+    color: var(--barva-pisma-sekundarni);
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+
+    padding: var(--mezera-xs);
+    margin-top: var(--mezera-xl);
+    margin-left: auto;
+    width: 14.25rem;
+    cursor: pointer;
 }
 
 dialog {
@@ -506,6 +511,29 @@ dialog {
 .na-stred {
     text-align: center;
     margin-top: 2rem;
+}
+
+/* Admin area */
+.navigace-admin {
+    display: flex;
+    gap: var(--mezera-xxxxl);
+    justify-content: center;
+    align-items: center;
+    background-color: var(--pozadi-navigace-admin);
+}
+
+.main-admin {
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+
+    .nadpis-admin {
+        display: flex;
+        justify-content: space-between;
+
+        .tlacitko {
+            margin: 0;
+        }
+    }
 }
 
 @media screen and (max-width: 1241px) {
