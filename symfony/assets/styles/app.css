@@ -61,7 +61,8 @@ body {
 body,
 input,
 button,
-textarea {
+textarea,
+select {
     font-family: var(--druh-pisma);
     font-size: 1.125rem;
 }
@@ -231,11 +232,18 @@ form {
 
     input,
     textarea,
+    select,
     button {
         width: 29.75rem;
         max-width: 100%;
         padding: var(--mezera-xs);
         border: 1px solid var(--ramecek-inputy);
+    }
+
+    input[type="file"] {
+        border: none;
+        padding-left: 0;
+        padding-top: var(--mezera-m);
     }
 
     textarea {
@@ -526,10 +534,15 @@ dialog {
     margin-top: 8rem;
     margin-bottom: 3rem;
 
+    h1 {
+        margin-bottom: var(--mezera-l);
+    }
+
     .nadpis-admin {
         display: flex;
         justify-content: space-between;
 
+        h1,
         .tlacitko {
             margin: 0;
         }

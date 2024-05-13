@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
+use App\Form\PostType;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use App\Utils\PaginationData;
@@ -118,6 +119,17 @@ class PostController extends AbstractController
         return $this->render('post/index_admin.html.twig', [
             'posts' => $paginator,
             'pagination_data' => $paginationData,
+        ]);
+    }
+
+    #[Route('/admin/prispevky/novy', name: 'app_create_post_admin')]
+    public function create(): Response
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+
+        return $this->render('post/create.html.twig', [
+            'form' => $form,
         ]);
     }
 }
