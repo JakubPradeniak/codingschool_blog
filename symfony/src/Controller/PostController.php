@@ -106,4 +106,18 @@ class PostController extends AbstractController
             'pagination' => $paginationData
         ]);
     }
+
+    #[Route('/admin/prispevky', name: 'app_posts_admin')]
+    public function indexAdmin(Request $request): Response
+    {
+        $page = max(1, $request->query->getInt('page', 1));
+        $offset = ($page - 1) * PostRepository::POSTS_PER_PAGE;
+        $paginator = $this->postRepository->getPaginatior(null, $offset);
+        $paginationData = new PaginationData(PostRepository::POSTS_PER_PAGE, $paginator->count(), $page);
+
+        return $this->render('post/index_admin.html.twig', [
+            'posts' => $paginator,
+            'pagination_data' => $paginationData,
+        ]);
+    }
 }

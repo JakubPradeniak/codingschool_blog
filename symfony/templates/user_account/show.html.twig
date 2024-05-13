@@ -16,7 +16,7 @@
     {{ form(update_password_form) }}
 
     {% if is_granted('ROLE_ADMIN') %}
-        <p><a href="">Administrace</a></p>
+        <p><a href="{{ path('app_posts_admin') }}">Administrace</a></p>
     {% endif %}
 
     <p><a href="{{ path('app_logout') }}">Odhlásit se</a></p>
