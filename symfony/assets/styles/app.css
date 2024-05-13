@@ -214,7 +214,16 @@ form {
         }
     }
 
-    label {
+    div:has(input[type="checkbox"]) {
+        flex-direction: row;
+
+        >input {
+            width: 1rem;
+        }
+    }
+
+    label,
+    input[type="checkbox"] {
         margin-top: var(--mezera-xl);
         margin-bottom: var(--mezera-s);
     }
@@ -492,6 +501,11 @@ dialog {
         margin: 0.75rem 0;
         font-style: italic;
     }
+}
+
+.na-stred {
+    text-align: center; 
+    margin-top: 2rem;
 }
 
 @media screen and (max-width: 1241px) {
