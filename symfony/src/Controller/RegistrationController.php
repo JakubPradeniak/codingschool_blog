@@ -79,7 +79,7 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Váš email byl ověřen..');
+        $this->addFlash('success', 'Váš email byl ověřen.');
 
         return $this->redirectToRoute('app_login');
     }
