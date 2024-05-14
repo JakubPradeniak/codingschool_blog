@@ -13,6 +13,8 @@ use App\Utils\PaginationData;
 use App\Utils\ReadingTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
@@ -138,10 +140,10 @@ class PostController extends AbstractController
 
             if ($image) {
                 $imageName = $imageUploader->upload($image);
-                $post->setImage($imageName);                
-                $imageUploadError = !$imageName;             
+                $post->setImage($imageName);
+                $imageUploadError = !$imageName;
             }
-
+    
             $this->entityManager->persist($post);
             $this->entityManager->flush();
 
@@ -151,12 +153,57 @@ class PostController extends AbstractController
                 $this->addFlash('success', 'Článek byl úspěšně přidán.');
             }
 
-            // TODO: redirect to edit page
-            return $this->redirectToRoute('app_posts_admin');
+            return $this->redirectToRoute('app_edit_post_admin', ['slug' => $post->getSlug()]);
         }
 
         return $this->render('post/create.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/admin/prispevky/{slug}/uprava', name: 'app_edit_post_admin')]
+    public function edit(
+        Request $request, 
+        Post $post, 
+        ImageUploader $imageUploader, 
+        ParameterBagInterface $parameterBag
+    ): Response
+    {
+        $editForm = $this->createForm(PostType::class, $post);
+
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $oldImage = $post->getImage();
+            $image = $editForm->get('image')->getData();
+            $imageUploadError = false;
+
+            if ($image) {
+                $imageName = $imageUploader->upload($image);
+                $post->setImage($imageName);
+                $imageUploadError = !$imageName;
+            }
+
+            if (!$imageUploadError && $oldImage) {
+                $imagesDirectory = $parameterBag->get('image_directory');
+                unlink("$imagesDirectory/$oldImage");
+            }
+    
+            $this->entityManager->persist($post);
+            $this->entityManager->flush();
+
+            if ($imageUploadError) {
+                $this->addFlash('error', 'Článek byl úspěšně upraven, ale nepodařilo se nahrát obrázek.');
+            } else {
+                $this->addFlash('success', 'Článek byl úspěšně upraven.');
+            }
+
+            return $this->redirectToRoute('app_edit_post_admin', ['slug' => $post->getSlug()]);
+        }
+
+
+        return $this->render('post/edit.html.twig', [
+            'post' => $post,
+            'edit_form' => $editForm,
         ]);
     }
 }
