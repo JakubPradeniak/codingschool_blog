@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
+use App\Form\DeletePostType;
 use App\Form\PostType;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
@@ -143,7 +144,7 @@ class PostController extends AbstractController
                 $post->setImage($imageName);
                 $imageUploadError = !$imageName;
             }
-    
+
             $this->entityManager->persist($post);
             $this->entityManager->flush();
 
@@ -163,13 +164,13 @@ class PostController extends AbstractController
 
     #[Route('/admin/prispevky/{slug}/uprava', name: 'app_edit_post_admin')]
     public function edit(
-        Request $request, 
-        Post $post, 
-        ImageUploader $imageUploader, 
+        Request $request,
+        Post $post,
+        ImageUploader $imageUploader,
         ParameterBagInterface $parameterBag
-    ): Response
-    {
+    ): Response {
         $editForm = $this->createForm(PostType::class, $post);
+        $deleteForm = $this->createForm(DeletePostType::class);
 
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -187,7 +188,7 @@ class PostController extends AbstractController
                 $imagesDirectory = $parameterBag->get('image_directory');
                 unlink("$imagesDirectory/$oldImage");
             }
-    
+
             $this->entityManager->persist($post);
             $this->entityManager->flush();
 
@@ -204,6 +205,29 @@ class PostController extends AbstractController
         return $this->render('post/edit.html.twig', [
             'post' => $post,
             'edit_form' => $editForm,
+            'delete_form' => $deleteForm
         ]);
+    }
+
+    #[Route('/admin/prispevky/{slug}/odstraneni', name: 'app_delete_post_admin', methods: ['POST'])]
+    public function destroy(Request $request, Post $post, ParameterBagInterface $parameterBag): Response
+    {
+        $form = $this->createForm(DeletePostType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($post->getImage()) {
+                unlink($parameterBag->get('image_directory') . '/' . $post->getImage());
+            }
+
+            $this->entityManager->remove($post);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Článek byl odstraněn.');
+            return $this->redirectToRoute('app_posts_admin');
+        }
+
+        $this->addFlash('error', 'Článek se nepodařilo odstranit.');
+        return $this->redirectToRoute('app_edit_post_admin', ['slug' => $post->getSlug()]);
     }
 }
