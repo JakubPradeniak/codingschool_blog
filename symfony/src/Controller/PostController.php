@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
+use App\Form\PostType;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
+use App\Service\ImageUploader;
 use App\Utils\PaginationData;
 use App\Utils\ReadingTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -118,6 +120,43 @@ class PostController extends AbstractController
         return $this->render('post/index_admin.html.twig', [
             'posts' => $paginator,
             'pagination_data' => $paginationData,
+        ]);
+    }
+
+    #[Route('/admin/prispevky/novy', name: 'app_create_post_admin')]
+    public function create(Request $request, ImageUploader $imageUploader): Response
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setAuthor($this->getUser());
+
+            $image = $form->get('image')->getData();
+            $imageUploadError = false;
+
+            if ($image) {
+                $imageName = $imageUploader->upload($image);
+                $post->setImage($imageName);                
+                $imageUploadError = !$imageName;             
+            }
+
+            $this->entityManager->persist($post);
+            $this->entityManager->flush();
+
+            if ($imageUploadError) {
+                $this->addFlash('error', 'Článek byl úspěšně přidán, ale nepodařilo se nahrát obrázek.');
+            } else {
+                $this->addFlash('success', 'Článek byl úspěšně přidán.');
+            }
+
+            // TODO: redirect to edit page
+            return $this->redirectToRoute('app_posts_admin');
+        }
+
+        return $this->render('post/create.html.twig', [
+            'form' => $form,
         ]);
     }
 }
