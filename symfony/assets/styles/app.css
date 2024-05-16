@@ -6,6 +6,7 @@
 
     --pozadi-aplikace: #F4F4F4;
     --pozadi-navigace: rgba(0, 0, 0, 0.9);
+    --pozadi-navigace-admin: #343434;
     --pozadi-zapati: #212121;
     --pozadi-elementu: #FFFFFF;
     --pozadi-tlacitek: #000000;
@@ -60,7 +61,8 @@ body {
 body,
 input,
 button,
-textarea {
+textarea,
+select {
     font-family: var(--druh-pisma);
     font-size: 1.125rem;
 }
@@ -214,13 +216,23 @@ form {
         }
     }
 
-    label {
+    div:has(input[type="checkbox"]) {
+        flex-direction: row;
+
+        >input {
+            width: 1rem;
+        }
+    }
+
+    label,
+    input[type="checkbox"] {
         margin-top: var(--mezera-xl);
         margin-bottom: var(--mezera-s);
     }
 
     input,
     textarea,
+    select,
     button {
         width: 29.75rem;
         max-width: 100%;
@@ -228,21 +240,14 @@ form {
         border: 1px solid var(--ramecek-inputy);
     }
 
-    textarea {
-        width: 100%;
+    input[type="file"] {
+        border: none;
+        padding-left: 0;
+        padding-top: var(--mezera-m);
     }
 
-    input[type="submit"],
-    button[type="submit"] {
-        border: none;
-        background-color: var(--pozadi-tlacitek);
-        color: var(--barva-pisma-sekundarni);
-        font-weight: 600;
-
-        margin-top: var(--mezera-xl);
-        margin-left: auto;
-        width: 14.25rem;
-        cursor: pointer;
+    textarea {
+        width: 100%;
     }
 
     ul {
@@ -254,6 +259,23 @@ form {
         color: var(--pozadi-zprava-chyba);
         text-align: right;
     }
+}
+
+input[type="submit"],
+button,
+.tlacitko {
+    border: none;
+    background-color: var(--pozadi-tlacitek);
+    color: var(--barva-pisma-sekundarni);
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+
+    padding: var(--mezera-xs);
+    margin-top: var(--mezera-xl);
+    margin-left: auto;
+    width: 14.25rem;
+    cursor: pointer;
 }
 
 dialog {
@@ -491,6 +513,39 @@ dialog {
     p {
         margin: 0.75rem 0;
         font-style: italic;
+    }
+}
+
+.na-stred {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Admin area */
+.navigace-admin {
+    display: flex;
+    gap: var(--mezera-xxxxl);
+    justify-content: center;
+    align-items: center;
+    background-color: var(--pozadi-navigace-admin);
+}
+
+.main-admin {
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+
+    h1 {
+        margin-bottom: var(--mezera-l);
+    }
+
+    .nadpis-admin {
+        display: flex;
+        justify-content: space-between;
+
+        h1,
+        .tlacitko {
+            margin: 0;
+        }
     }
 }
 
